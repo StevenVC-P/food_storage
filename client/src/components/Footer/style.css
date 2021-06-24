@@ -1,0 +1,15 @@
+footer{
+    background-color: #F8F8F7;
+    color: #8E695F;
+    position:fixed;
+    bottom: 0;
+}
+
+.footer{
+    font-weight: bold;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: xx-small;
+}
+  

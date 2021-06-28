@@ -4,4 +4,7 @@ export default {
     getLocations: function(){
         return axios.get("/api/location");
     },
+    addLocation: function(locationData) {
+        return axios.post("api/location", locationData)
+    }
 }

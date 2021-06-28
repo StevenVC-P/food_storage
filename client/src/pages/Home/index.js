@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect } from "react";
 import Location from "../../components/Location";
+import AddLocation from "../../components/Add_Location";
 // import Row from "../components/Row";
 // import Col from "../components/Col";
 import { Link } from "react-router-dom";
@@ -8,9 +9,23 @@ import Container from "../../components/Container";
 import API from "../../utils/API";
 
 
-function Home () {
+function Home (props) {
     const [locationState, setLocationState] = useState([])
     const [count, setCount] = useState(0)
+
+    const submitLocation = (data) =>{
+        API.addLocation(data)
+        .then(res => {
+            console.log('Location Added', res)
+            if(res.status === 200){
+                console.log("SUCCESS! Location Added")
+            } else {
+            console.log("FAIL", res.status)
+            }
+        setCount(+1)
+    })
+    .catch(err => console.log("ERROR ADDING COMMENT", err))
+    }
 
     useEffect(()=>{
         API.getLocations()
@@ -22,11 +37,7 @@ function Home () {
 
     return (
         <div>
-            <Container style={{ marginTop:20}}>
-                <p>Add a location</p>
-                <input type="text" id="newLocation"/>
-                <button type="submit" id="btnLocation">+</button>
-            </Container>
+            <AddLocation submitLocationa={submitLocation}/>
             <Container>
             <div className = "col-sm">
                 <div className = "search">

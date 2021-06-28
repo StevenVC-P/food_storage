@@ -6,7 +6,7 @@ import "./style.css";
 function Header () {
     return (
         <header className="text-center">
-            <h1 class="display-4 col-12">My Food Storage</h1>
+            <h1 className="display-4 col-12">My Food Storage</h1>
             {/* <nav className="navbar navbar-expand navbar-light d-flex justify-content-between">
                 <ul className="navbar-nav">
                     <li className="nav-item">

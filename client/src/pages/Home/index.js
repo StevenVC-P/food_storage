@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect } from "react";
-import Location from "../components/Location";
+import Location from "../../components/Location";
 // import Row from "../components/Row";
 // import Col from "../components/Col";
-import Container from "../components/Container";
-import API from "../utils/API";
+import { Link } from "react-router-dom";
+import Container from "../../components/Container";
+import API from "../../utils/API";
 
 
 function Home () {
     const [locationState, setLocationState] = useState([])
+    const [count, setCount] = useState(0)
 
     useEffect(()=>{
         API.getLocations()
@@ -16,7 +18,7 @@ function Home () {
             console.log(res)
             setLocationState(res.data)
         })
-    });
+    },[count])
 
     return (
         <div>
@@ -26,16 +28,19 @@ function Home () {
                 <button type="submit" id="btnLocation">+</button>
             </Container>
             <Container>
-                <h2>Locations:</h2>
-                {locationState.map(userLocation => (
-                    // eslint-disable-next-line react/jsx-no-undef
-                    <Link to={`/location/${userLocation._id}`}>
-                        <Location
-                        key={userLocation._id}
-                        locationName={userLocation.locationName}
-                        />
-                    </Link>
-                ))}
+            <div className = "col-sm">
+                <div className = "search">
+                    <h2>Locations:</h2>
+                    {locationState.map(location => (
+                        <Link to={`/location/${location._id}`}>
+                            <Location
+                            key={location._id}
+                            locationName={location.locationName}
+                            />
+                        </Link>
+                    ))}
+                </div>
+            </div>
             </Container>
 
         </div>

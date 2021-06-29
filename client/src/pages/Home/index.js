@@ -13,24 +13,24 @@ function Home (props) {
     const [locationState, setLocationState] = useState([])
     const [count, setCount] = useState(0)
 
-    // const submitLocation = (data) =>{
-    //     API.addLocation(data)
-    //     .then(res => {
-    //         console.log('Location Added', res)
-    //         if(res.status === 200){
-    //             console.log("SUCCESS! Location Added")
-    //         } else {
-    //         console.log("FAIL", res.status)
-    //         }
-    //     setCount(+1)
-    // })
-    // .catch(err => console.log("ERROR ADDING COMMENT", err))
-    // }
+    const refresh = (data) => {
+        API.addLocation({locationName: data.newLocation})
+        .then(res => {
+            console.log('Location Res', res)
+            if(res.status === 200){
+                console.log("SUCCESS! Location Added")
+            } else {
+                console.log("FAIL", res.status)
+            }
+        })
+        .catch(err => console.log("ERROR ADDING LOCATION", err))
+        setCount(count +1)
+    }
 
     useEffect(()=>{
         setLocationState(locationState)
         setCount(+1)
-    },[]);
+    },[count]);
 
     useEffect(()=> {
         API.getLocations()
@@ -42,7 +42,7 @@ function Home (props) {
 
     return (
         <div>
-            <AddLocation />
+            <AddLocation submitLocation={refresh} />
             <Container>
             <div className = "col-sm">
                 <div className = "search">

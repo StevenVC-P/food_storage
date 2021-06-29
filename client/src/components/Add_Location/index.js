@@ -4,6 +4,7 @@ import Container from "../Container";
 
 function AddLocation (props) {
     const [newLocation, addNewLocation] = useState({});
+    const [count, setCount] = useState(0);
 
     function handleInputChange(event) {
         const { name, value } = event.target;
@@ -14,19 +15,8 @@ function AddLocation (props) {
         e.preventDefault();
         console.log(newLocation)
         if(newLocation.newLocation){
-        API.addLocation({
-            locationName: newLocation.newLocation
-        })
-        .then(res => {
-            console.log('Location Res', res)
-            if(res.status === 200){
-                console.log("SUCCESS! Location Added")
-            } else {
-                console.log("FAIL", res.status)
-            }
-        })
-        .catch(err => console.log("ERROR ADDING LOCATION", err))
-        };
+            props.submitLocation(newLocation)
+        }
     };
 
     return(

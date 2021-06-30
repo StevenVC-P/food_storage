@@ -1,8 +1,14 @@
 import React from "react";
+import "./style.css"
 
 function Location (props) {
+
+
     return (
-        <h2 className="card-title">{props.locationName}</h2>
+        <div>
+            <h2 className="card-title">{props.locationName}</h2>
+            <button type="submit" className="remove">X</button>
+        </div>
     );
 }
 

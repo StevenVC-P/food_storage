@@ -5,6 +5,9 @@ export default {
         return axios.get("/api/location");
     },
     addLocation: function(locationData) {
-        return axios.post("api/location", locationData)
+        return axios.post("api/location", locationData);
+    },
+    removeLocation: function(id) {
+        return axios.delete("/api/location/id", { params: { id } });
     }
 }

@@ -10,8 +10,8 @@ import API from "../../utils/API";
 
 
 function Home (props) {
-    const [locationState, setLocationState] = useState([])
-    const [count, setCount] = useState(0)
+    const [locationState, setLocationState] = useState([]);
+    const [count, setCount] = useState(0);
 
     const refresh = (data) => {
         API.addLocation({locationName: data.newLocation})
@@ -25,7 +25,17 @@ function Home (props) {
         })
         .catch(err => console.log("ERROR ADDING LOCATION", err))
         setCount(count +1)
-    }
+    };
+
+    const remove = (data) => {
+        console.log(data)
+        API.removeLocation(data)
+        .then(res => {
+            console.log("location data:", res)
+        })
+        .catch(err => console.log(err));
+        setCount(count +1)
+    };
 
     useEffect(()=>{
         setLocationState(locationState)
@@ -49,8 +59,10 @@ function Home (props) {
                     <h2>Locations:</h2>
                     {locationState.map(location => (
                         <Link to={`/location/${location._id}`}>
-                            <Location
+                            <Location 
+                            deleteThis={remove}
                             key={location._id}
+                            id={location._id}
                             locationName={location.locationName}
                             />
                         </Link>

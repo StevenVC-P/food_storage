@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Location from "../../components/Location";
 import AddLocation from "../../components/Add_Location";
+import AddFood from "../../components/Add_Food";
 // import Row from "../components/Row";
 // import Col from "../components/Col";
 import { Link } from "react-router-dom";
@@ -53,6 +54,7 @@ function Home (props) {
     return (
         <div>
             <AddLocation submitLocation={refresh} />
+            <AddFood />
             <Container>
             <div className = "col-sm">
                 <div className = "search">

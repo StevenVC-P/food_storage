@@ -6,4 +6,7 @@ router.route('/')
     .get(locationController.findAll)
     .post(locationController.create)
 
+router.route('/:id')
+    .delete(locationController.remove)
+
 module.exports = router;

@@ -3,7 +3,6 @@ import Container from "../Container";
 
 function AddLocation (props) {
     const [newLocation, addNewLocation] = useState({});
-    const [count, setCount] = useState(0);
 
     function handleInputChange(event) {
         const { name, value } = event.target;

@@ -8,6 +8,7 @@ export default {
         return axios.post("api/location", locationData);
     },
     removeLocation: function(id) {
-        return axios.delete("/api/location/id", { params: { id } });
+        console.log("axios", id)
+        return axios.delete("/api/location/" + id);
     }
 }

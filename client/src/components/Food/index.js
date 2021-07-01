@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./style.css"
 
-function Location (props) {
+function Food (props) {
 
     const onRemove = (e) => {
         e.preventDefault();
@@ -11,10 +11,10 @@ function Location (props) {
 
     return (
         <div>
-            <h2 className="card-title">{props.locationName}</h2>
+            <h2 className="card-title">{props.foodName}</h2>
             <button type="button" className="remove" onClick={onRemove}>X</button>
         </div>
     );
 }
 
-export default Location;
+export default Food;

@@ -14,7 +14,7 @@ const foodSchema = new Schema({
         type: String,
         require: true
     }
-})
+}, {timestamps: true})
 
 const FoodModel = mongoose.model("Food", foodSchema);
 

@@ -9,4 +9,8 @@ router.route('/')
 router.route('/:id')
     .delete(locationController.remove)
 
+router.route('/food')
+    .post(locationController.addFood)
+    .get(locationController.findAllWithFoods)
+
 module.exports = router;

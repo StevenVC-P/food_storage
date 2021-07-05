@@ -38,10 +38,10 @@ function Home (props) {
         setCount(count +1)
     };
 
-    useEffect(()=>{
-        setLocationState(locationState)
-        setCount(+1)
-    },[count]);
+    // useEffect(()=>{
+    //     setLocationState(locationState)
+    //     setCount(+1)
+    // },[count]);
 
     useEffect(()=> {
         API.getLocations()

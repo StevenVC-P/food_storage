@@ -7,6 +7,19 @@ module.exports = {
         .then(locationData => res.json(locationData))
         .catch(err => res.status(422).json(err));
     },
+    findAllNames: function(req, res) {
+        LocationModel
+        .find({"locationName":{"$exists":"true"}})
+        .then(locationData => {
+            let data = [];
+            for(let i = 0; i<locationData.length; i++){
+               data.push({value: locationData[i].locationName})
+            }
+            console.log(data)
+            res.json(data)})
+        .catch(err => res.status(422).json(err));
+    },
+
     findById: function(req, res) {
         LocationModel
             .findById(req.params.id)
@@ -33,6 +46,9 @@ module.exports = {
             .then(locationData => res.json(locationData))
             .catch(err => res.status(422).json(err));
     },
+
+
+
     addFood: function(req, res) {
         console.log("Controller", req.body)
         FoodModel

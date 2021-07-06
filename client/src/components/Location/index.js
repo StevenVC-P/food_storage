@@ -18,9 +18,9 @@ function Location (props) {
     }
 
     useEffect(() => {
-        API.getLocations(locationId)
+        API.getLocations()
         .then(res => {
-            console.log("location data:", res.data)
+            //console.log("location data:", res.data)
             //setData(res.data)
         })
     },

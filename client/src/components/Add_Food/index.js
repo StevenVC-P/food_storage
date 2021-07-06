@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {render} from 'react-dom';
 import Downshift from 'downshift';
 import Container from "../Container";
 import "./style.css";
+import API from "../../utils/API";
 
 function AddFood (props) {
     const [newFoodName, addNewFoodName] = useState({});
     const [newFoodAmount, addNewFoodAmount] = useState({});
-    const items = [
-        {value: 'apple'},
-        {value: 'pear'},
-        {value: 'orange'},
-        {value: 'grape'},
-        {value: 'banana'},
-      ]
+    const [items, setItems] = useState([]);
+    const [count, setCount] = useState(0);
+        
+    useEffect(() =>{
+    API.getLocationNames()
+        .then(res =>{
+            console.log("item", res.data)
+            setItems(res.data)
+        })
+    },[count])
+
     function handleInputChange(e) {
         const { name, value } = e.target;
         addNewFoodName({...newFoodName, [name]: value})
@@ -22,7 +27,7 @@ function AddFood (props) {
     function handleAmountChange(e) {
         const { name, value} = e.target;
         addNewFoodAmount({...newFoodAmount, [name]: value})
-    }
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -57,7 +62,7 @@ function AddFood (props) {
                             getRootProps,
                             }) => (
                                 <div>
-                                    <label {...getLabelProps()}>Enter a fruit</label>
+                                    <label {...getLabelProps()}>Add a Location  </label>
                                     <div
                                         style={{display:'inline-block'}}
                                         {...getRootProps({}, {suppressRefErrr: true})}
@@ -88,8 +93,8 @@ function AddFood (props) {
                             </ul>
                         </div>
                         )}
-                    </Downshift>,
-                    document.getElementById('root'),
+                    </Downshift>
+
                     <button type="submit" className="submit" onClick={onSubmit} id="btnFood">+</button>
                 </form>
             </Container>

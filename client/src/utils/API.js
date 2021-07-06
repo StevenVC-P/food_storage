@@ -4,8 +4,11 @@ export default {
     getLocations: function(){
         return axios.get("/api/location");
     },
+    getLocationNames: function(){
+        return axios.get("/api/location/locationName")
+    },
     addLocation: function(locationData) {
-        return axios.post("api/location", locationData);
+        return axios.post("/api/location", locationData);
     },
     removeLocation: function(id) {
         console.log("axios", id)

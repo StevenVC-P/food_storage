@@ -15,6 +15,7 @@ function Location (props) {
         e.preventDefault();
         console.log(props.id);
         props.deleteThis(props.id);
+        setCount(+1)
     }
 
     useEffect(() => {

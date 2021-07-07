@@ -19,7 +19,6 @@ module.exports = {
             res.json(data)})
         .catch(err => res.status(422).json(err));
     },
-
     findById: function(req, res) {
         LocationModel
             .findById(req.params.id)
@@ -46,9 +45,6 @@ module.exports = {
             .then(locationData => res.json(locationData))
             .catch(err => res.status(422).json(err));
     },
-
-
-
     addFood: function(req, res) {
         console.log("Controller", req.body)
         FoodModel

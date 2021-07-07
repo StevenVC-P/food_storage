@@ -8,6 +8,7 @@ import API from "../../utils/API";
 function AddFood (props) {
     const [newFoodName, addNewFoodName] = useState({});
     const [newFoodAmount, addNewFoodAmount] = useState({});
+    const [newAmountType, addNewAmountType] = useState({});
     const [items, setItems] = useState([]);
     const [count, setCount] = useState(0);
         
@@ -29,11 +30,20 @@ function AddFood (props) {
         addNewFoodAmount({...newFoodAmount, [name]: value})
     };
 
+    function handleAmountType(e) {
+        const { name, value} = e.target;
+        addNewAmountType({...newAmountType, [name]: value})
+    };
+
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(newFoodName)
-        if(newFoodName.newFoodName  && newFoodAmount.newFoodAmount){
-            props.submitFood(newFoodName)
+        if(newFoodName.newFoodName && newFoodAmount.newFoodAmount && newAmountType.newAmountType){
+            API.addFood({
+                foodName: newFoodName.newFoodName,
+                foodAmount: newFoodAmount.newFoodAmount,
+                amountType: newAmountType.newAmountType
+            })
         }
     };
 
@@ -44,6 +54,7 @@ function AddFood (props) {
                 <form>
                     <input type="text" name="newFoodName" placeholder="Food Name" onChange={handleInputChange} id="newFoodName"/>
                     <input type="text" name="newFoodAmount" placeholder="#" onChange={handleAmountChange} id="newFoodAmount"/>
+                    <input type="text" name="newAmountType" placeholder="#" onChange={handleAmountType} id="newAmountType"/>
                     <Downshift
                         onChange={selection =>
                         alert(selection ? `You Selected ${selection.value}`: `Selection Cleared`)

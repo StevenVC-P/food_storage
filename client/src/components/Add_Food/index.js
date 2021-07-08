@@ -44,6 +44,17 @@ function AddFood (props) {
                 foodAmount: newFoodAmount.newFoodAmount,
                 amountType: newAmountType.newAmountType
             })
+            .then(res =>{
+                console.log('New Food Res', res)
+                if (res.status === 200){
+                    console.log('Success', res.data)
+                    API.locateFood(res.data)
+                } else {
+                    console.log(res.status)
+                }
+            
+            })
+            .catch(err => console.log("Food Add Error", err));
         }
     };
 

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import Container from "../../components/Container";
+import DropdownLocation from "../../components/DropdownLocation";
+import { Link } from "react-router-dom";
 import DropdownCombobox from '../DropdownComboBox'
-import Container from "../Container";
 import "./style.css";
 import API from "../../utils/API";
 
 function AddFood (props) {
+    const [locationState, setLocationState] = useState([]);
     const [selection, addSelection] = useState("");
     const [newFoodName, addNewFoodName] = useState({});
     const [newFoodAmount, addNewFoodAmount] = useState({});
@@ -17,6 +20,14 @@ function AddFood (props) {
         .then(res =>{
             console.log("item", res.data)
             setItems(res.data)
+        })
+    },[count])
+
+    useEffect(()=> {
+        API.getLocations()
+        .then(res =>{
+            console.log(res)
+            setLocationState(res.data)
         })
     },[count])
 
@@ -81,7 +92,23 @@ function AddFood (props) {
                     <input type="text" name="newFoodName" placeholder="Food Name" onChange={handleInputChange} id="newFoodName"/>
                     <input type="text" name="newFoodAmount" placeholder="#" onChange={handleAmountChange} id="newFoodAmount"/>
                     <input type="text" name="newAmountType" placeholder="#" onChange={handleAmountType} id="newAmountType"/>
-                    <DropdownCombobox />
+                    <DropdownCombobox>
+                    <div className = "col-sm">
+                        <div className = "search">
+                            <h2>Locations:</h2>
+                            {locationState.map(location => (
+                                <Link to={`/location/${location._id}`}>
+                                    <DropdownLocation
+                                    //deleteThis={remove}
+                                    key={location._id}
+                                    id={location._id}
+                                    locationName={location.locationName}
+                                    />
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    </DropdownCombobox>
 
                     <button type="submit" className="submit" onClick={onSubmit} id="btnFood">+</button>
                 </form>

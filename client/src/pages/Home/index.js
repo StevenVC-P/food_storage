@@ -60,14 +60,14 @@ function Home (props) {
                 <div className = "search">
                     <h2>Locations:</h2>
                     {locationState.map(location => (
-                        <Link to={`/location/${location._id}`}>
+                        // <Link to={`/location/${location._id}`}>
                             <Location 
                             deleteThis={remove}
                             key={location._id}
                             id={location._id}
                             locationName={location.locationName}
                             />
-                        </Link>
+                        //</Link>
                     ))}
                 </div>
             </div>

@@ -1,86 +1,41 @@
-import * as React from 'react'
-import {render} from 'react-dom'
-import {useCombobox} from 'downshift'
-import {
-  Input,
-  IconButton,
-  FormLabel,
-  List,
-  ListItem,
-  ListItemText,
-} from '@material-ui/core'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import React, {useState, useEffect} from "react";
+import Container from "../../components/Container"
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownLocation from "../DropdownLocation";
+import { Link } from "react-router-dom";
+import API from "../../utils/API";
 
-import {items, useStyles, comboboxStyles} from './utils'
+function DropdownComboBox(props) {
+  const [count, setCount] = useState(0);
+  const [locationState, setLocationState] = useState([]);
 
-function DropdownCombobox() {
-  const classes = useStyles()
-  const itemToString = (item) => (item ? item.primary : '')
-  const [inputItems, setInputItems] = React.useState(items)
-  const {
-    isOpen,
-    getToggleButtonProps,
-    getLabelProps,
-    getMenuProps,
-    highlightedIndex,
-    getItemProps,
-    getInputProps,
-    getComboboxProps,
-  } = useCombobox({
-    items: inputItems,
-    itemToString,
-    onInputValueChange: ({inputValue}) => {
-      setInputItems(
-        items.filter((item) =>
-          itemToString(item).toLowerCase().startsWith(inputValue.toLowerCase()),
-        ),
-      )
-    },
-  })
+  useEffect(()=> {
+    API.getLocations()
+    .then(res =>{
+        console.log(res)
+        setLocationState(res.data)
+    })
+  },[count])
 
+  return(
+    <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+        Locations
+      </Dropdown.Toggle>
 
-  return (
-    <div>
-      <FormLabel {...getLabelProps()}>Choose a Location:</FormLabel>
-      <div style={comboboxStyles} {...getComboboxProps()}>
-        <Input
-          placeholder="Employees"
-          {...getInputProps({refKey: 'inputRef'})}
-        />
-        <IconButton
-          color="secondary"
-          className={classes.button}
-          {...getToggleButtonProps()}
-        >
-          <ExpandMoreIcon className={classes.rightIcon} />
-        </IconButton>
-      </div>
-      <List className={classes.root} {...getMenuProps()}>
-        {isOpen &&
-          inputItems.map((item, index) => {
-            return (
-              <ListItem
-                key={`${item.primary}-${index}`}
-                className={
-                  index === highlightedIndex ? classes.highlighted : undefined
-                }
-                {...getItemProps({
-                  item,
-                  index,
-                })}
-              >
-                <ListItemText
-                  primary={item.primary}
-                  secondary={item.secondary}
+      <Dropdown.Menu>
+          {locationState.map(location => (
+            // <Link to={`/location/${location._id}`}>
+                <DropdownLocation
+                key={location._id}
+                id={location._id}
+                locationName={location.locationName}
                 />
-              </ListItem>
-            )
-          })}
-      </List>
-    </div>
+            // </Link>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
   )
-}
+};
 
-render(<DropdownCombobox />, document.getElementById('root'))
-
-export default DropdownCombobox
+export default DropdownComboBox

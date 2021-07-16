@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from "react";
-import { useParams } from "react-router-dom";
 import API from "../../utils/API";
 //import Food from "../Food";
 import "./style.css";
 
 function Location (props) {
-    const [readyRender, setReadyRender] = useState(false);
+    //const [readyRender, setReadyRender] = useState(false);
     //const [foodState, setFoodState] = useState([]);
     //const [data, setData] = useState();
-    const {locationId} = useParams()
+    //const {locationId} = useParams()
     const [count, setCount] = useState(0);
 
     const onRemove = (e) => {
@@ -17,16 +16,6 @@ function Location (props) {
         props.deleteThis(props.id);
         setCount(+1)
     }
-
-    useEffect(() => {
-        API.getLocations()
-        .then(res => {
-            //console.log("location data:", res.data)
-            //setData(res.data)
-        })
-    },
-    [count]
-    )
 
     return (
         <div>

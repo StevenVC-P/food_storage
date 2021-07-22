@@ -5,7 +5,7 @@ function Food (props) {
 
     const onRemove = (e) => {
         e.preventDefault();
-        console.log(props.id);
+        // console.log(props.id);
         props.deleteThis(props.id);
     }
 

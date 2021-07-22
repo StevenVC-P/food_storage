@@ -12,6 +12,7 @@ router.route('/locationName')
     .get(locationController.findAllNames)
 
 router.route('/:id')
+    .get(locationController.findById)
     .delete(locationController.remove)
 
 router.route('/food')

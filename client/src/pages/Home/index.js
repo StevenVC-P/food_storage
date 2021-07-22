@@ -1,11 +1,7 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState, useEffect } from "react";
 import Location from "../../components/Location";
 import AddLocation from "../../components/Add_Location";
 import AddFood from "../../components/Add_Food";
-// import Row from "../components/Row";
-// import Col from "../components/Col";
-import { Link } from "react-router-dom";
 import Container from "../../components/Container";
 import API from "../../utils/API";
 
@@ -17,11 +13,11 @@ function Home (props) {
     const refresh = (data) => {
         API.addLocation({locationName: data.newLocation})
         .then(res => {
-            console.log('Location Res', res)
+            // console.log('Location Res', res)
             if(res.status === 200){
-                console.log("SUCCESS! Location Added")
+                // console.log("SUCCESS! Location Added")
             } else {
-                console.log("FAIL", res.status)
+                // console.log("FAIL", res.status)
             }
         })
         .catch(err => console.log("ERROR ADDING LOCATION", err))
@@ -29,24 +25,19 @@ function Home (props) {
     };
 
     const remove = (data) => {
-        console.log(data)
+        // console.log(data)
         API.removeLocation(data)
         .then(res => {
-            console.log("location data:", res)
+            // console.log("location data:", res)
         })
         .catch(err => console.log(err));
         setCount(count +1)
     };
 
-    // useEffect(()=>{
-    //     setLocationState(locationState)
-    //     setCount(+1)
-    // },[count]);
-
     useEffect(()=> {
         API.getLocations()
         .then(res =>{
-            console.log(res)
+            // console.log(res)
             setLocationState(res.data)
         })
     },[count])

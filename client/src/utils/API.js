@@ -7,6 +7,9 @@ export default {
     getLocationNames: function(){
         return axios.get("/api/location/locationName")
     },
+    getLocationName: function(id){
+        return axios.get("/api/location/" + id)
+    },
     addLocation: function(locationData) {
         return axios.post("/api/location", locationData);
     },
@@ -20,7 +23,7 @@ export default {
     locateFood:function(foodData) {
         return axios.post("/api/location/food", foodData)
     }
-    // getLocationFodds: function(data) {
+    // getLocationFoods: function(data) {
     //     return axios.get("/api/location/food", data)
     // }
 }

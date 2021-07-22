@@ -1,41 +1,45 @@
 import React, {useState, useEffect} from "react";
-import Container from "../../components/Container"
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownLocation from "../DropdownLocation";
-import { Link } from "react-router-dom";
 import API from "../../utils/API";
 
 function DropdownComboBox(props) {
   const [count, setCount] = useState(0);
   const [locationState, setLocationState] = useState([]);
+  const [buttonState, setButtonState] = useState("Select")
 
   useEffect(()=> {
     API.getLocations()
     .then(res =>{
-        console.log(res)
         setLocationState(res.data)
     })
   },[count])
 
+  const handleInputChange = (data) => {
+    console.log(data)
+    API.getLocationName(data)
+    .then(res =>{
+      setButtonState(res.data.locationName)
+    })
+  };
+
   return(
     <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Locations
+        <Dropdown.Menu>
+            {locationState.map(location => (
+                  <DropdownLocation
+                  pickThis={handleInputChange}
+                  key={location._id}
+                  id={location._id}
+                  locationName={location.locationName}
+                  />
+          ))}
+        </Dropdown.Menu>
+        <div>{buttonState}</div>
       </Dropdown.Toggle>
-
-      <Dropdown.Menu>
-          {locationState.map(location => (
-            // <Link to={`/location/${location._id}`}>
-                <DropdownLocation
-                key={location._id}
-                id={location._id}
-                locationName={location.locationName}
-                />
-            // </Link>
-        ))}
-      </Dropdown.Menu>
     </Dropdown>
   )
 };
 
-export default DropdownComboBox
+export default DropdownComboBox;

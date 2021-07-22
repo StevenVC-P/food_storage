@@ -22,7 +22,6 @@ module.exports = {
     findById: function(req, res) {
         LocationModel
             .findById(req.params.id)
-            // .populate("Foods")
             .then(locationData => res.json(locationData))
             .catch(err => res.status(422).json(err))
     },

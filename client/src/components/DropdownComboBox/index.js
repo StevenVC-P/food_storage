@@ -11,7 +11,7 @@ function DropdownComboBox(props) {
   useEffect(()=> {
     API.getLocations()
     .then(res =>{
-        setLocationState(res.data)
+        setLocationState(res.data)  
     })
   },[count])
 
@@ -19,7 +19,11 @@ function DropdownComboBox(props) {
     console.log(data)
     API.getLocationName(data)
     .then(res =>{
+      props.setCount(props.count+1)
       setButtonState(res.data.locationName)
+      props.pickThis(res.data.locationName)
+      
+      console.log("THE BIG True", props.count)
     })
   };
 

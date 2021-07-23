@@ -21,19 +21,17 @@ function AddFood (props) {
         })
     },[count])
 
-    useEffect(()=> {
+    useEffect((data)=> {
         API.getLocations()
         .then(res =>{
            // console.log(res)
             setLocationState(res.data)
         })
-    },[count])
+        console.log(selection)
+    },[selection])
 
     function handleSelection(data) {
-        console.log(data)
         addSelection(data)
-        console.log(selection)
-        setCount(+1)
     };
 
     function handleInputChange(e) {
@@ -54,8 +52,7 @@ function AddFood (props) {
    const handleSubmit = (e) => {
         e.preventDefault();
         console.log(selection)
-        console.log(selection.value)
-        if(selection.value){
+        if(selection){
             if(newFoodName.newFoodName && newFoodAmount.newFoodAmount && newAmountType.newAmountType){
                 API.getLocationNames(selection.value)
                 .then(res => {

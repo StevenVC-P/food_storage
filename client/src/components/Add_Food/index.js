@@ -6,7 +6,7 @@ import API from "../../utils/API";
 
 function AddFood (props) {
     const [locationState, setLocationState] = useState([]);
-    const [selection, addSelection] = useState("");
+    const [selection, addSelection] = useState();
     const [newFoodName, addNewFoodName] = useState({});
     const [newFoodAmount, addNewFoodAmount] = useState({});
     const [newAmountType, addNewAmountType] = useState({});
@@ -30,8 +30,10 @@ function AddFood (props) {
     },[count])
 
     function handleSelection(data) {
-        addSelection(...selection, data)
+        console.log(data)
+        addSelection(data)
         console.log(selection)
+        setCount(+1)
     };
 
     function handleInputChange(e) {

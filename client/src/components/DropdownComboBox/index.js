@@ -21,8 +21,7 @@ function DropdownComboBox(props) {
     .then(res =>{
       props.setCount(props.count+1)
       setButtonState(res.data.locationName)
-      props.pickThis(res.data.locationName)
-      
+      props.pickThis(res.data._id)
       console.log("THE BIG True", props.count)
     })
   };

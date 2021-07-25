@@ -10,7 +10,7 @@ function AddFood (props) {
     const [newFoodName, addNewFoodName] = useState("");
     const [newFoodAmount, addNewFoodAmount] = useState();
     const [newAmountType, addNewAmountType] = useState("");
-    const [{foodName, foodAmount, amountType}, addFoodValue] = useState( {});
+    const [{foodName, foodAmount, amountType}, addFoodValue] = useState({});
     const [items, setItems] = useState([]);
     const [count, setCount] = useState(0);
         
@@ -70,21 +70,17 @@ function AddFood (props) {
                         console.log(newAmountType)
                         console.log({foodName, foodAmount, amountType})
 
-                        // API.addFood(res.data)({
-                        //     foodName: {foodName},
-                        //     foodAmount: {amount},
-                        //     amountType: {type}
-                        // })
-                        // .then(res =>{
-                        //     console.log('New Food Res', res)
-                        //     if (res.status === 200){
-                        //         console.log('Success', res.data)
-                        //         API.locateFood(res.data)
-                        //     } else { 
-                        //         console.log(res.status)
-                        //     }
-                        // })
-                        // .catch(err => console.log("Food Add Error", err));
+                        API.addFood({foodName, foodAmount, amountType, location: selection})
+                        .then(res =>{
+                            console.log('New Food Res', res)
+                            if (res.status === 200){
+                                console.log('Success', res.data)
+                                API.locateFood(res.data)
+                            } else { 
+                                console.log(res.status)
+                            }
+                        })
+                        .catch(err => console.log("Food Add Error", err));
                     }
                 })
             }

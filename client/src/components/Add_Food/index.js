@@ -7,25 +7,24 @@ import API from "../../utils/API";
 function AddFood (props) {
     const [locationState, setLocationState] = useState([]);
     const [selection, addSelection] = useState();
-    const [newFoodName, addNewFoodName] = useState({});
-    const [newFoodAmount, addNewFoodAmount] = useState({});
-    const [newAmountType, addNewAmountType] = useState({});
-    const [{foodName, amount, type} , addFoodValue] = useState({foodName:newFoodName, amount:newFoodAmount, type:newAmountType});
+    const [newFoodName, addNewFoodName] = useState("");
+    const [newFoodAmount, addNewFoodAmount] = useState();
+    const [newAmountType, addNewAmountType] = useState("");
+    const [{foodName, foodAmount, amountType}, addFoodValue] = useState( {});
     const [items, setItems] = useState([]);
     const [count, setCount] = useState(0);
         
     useEffect(() =>{
     API.getLocationNames()
         .then(res =>{
-           // console.log("item", res.data)
             setItems(res.data)
+
         })
     },[count])
 
     useEffect((data)=> {
         API.getLocations()
         .then(res =>{
-           // console.log(res)
             setLocationState(res.data)
         })
         console.log(selection)
@@ -38,16 +37,15 @@ function AddFood (props) {
     function handleInputChange(e) {
         const { name, value } = e.target;
         addNewFoodName({...newFoodName, [name]: value})
+        console.log(newFoodName.newFoodName)
     };
 
     function handleAmountChange(e) {
-        console.log(e.target)
         const { name, value } = e.target;
         addNewFoodAmount({...newFoodAmount, [name]: value})
     };
 
     function handleAmountType(e) {
-        console.log(e.target)
         const { name, value} = e.target;
         addNewAmountType({...newAmountType, [name]: value})
     };
@@ -60,23 +58,22 @@ function AddFood (props) {
                 API.getLocationName(selection)
                 .then(res => {
                     if(res.status === 200){
-                        //const { name, value} = e.target;
-                        addFoodValue(currentState => ({
-                            ...currentState,
-                            name:{foodName},
-                            amount:{amount},
-                            type:{type},
-                        }))
-                        //    {...foodValue, name:{foodName}, amount:{amount}, type:{type}, location: selection})
-                        console.log({foodName, amount, type})
-                        // console.log(res.data)
-                        // console.log("name:",newFoodName.newFoodName)
-                        // console.log("Amount:",newFoodAmount.newFoodAmount)
-                        // console.log("type:",newAmountType.newAmountType)
+                        addFoodValue({
+                            foodName:newFoodName.newFoodName,
+                            foodAmount:newFoodAmount.newFoodAmount,
+                            amountType:newAmountType.newAmountType,
+                            // location:{location}
+                        })
+                        // console.log(res)
+                        console.log(newFoodName)
+                        console.log(newFoodAmount)
+                        console.log(newAmountType)
+                        console.log({foodName, foodAmount, amountType})
+
                         // API.addFood(res.data)({
-                        //     foodName: newFoodName.newFoodName,
-                        //     foodAmount: newFoodAmount.newFoodAmount,
-                        //     amountType: newAmountType.newAmountType
+                        //     foodName: {foodName},
+                        //     foodAmount: {amount},
+                        //     amountType: {type}
                         // })
                         // .then(res =>{
                         //     console.log('New Food Res', res)

@@ -14,6 +14,7 @@ router.route('/locationName')
 router.route('/:id')
     .get(locationController.findById)
     .delete(locationController.remove)
+    .post(locationController.addFood)
 
 router.route('/food')
     .post(locationController.addFood)

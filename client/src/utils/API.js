@@ -18,7 +18,7 @@ export default {
         return axios.delete("/api/location/" + id);
     },
     addFood: function(foodData) {
-        return axios.post("/api/food", foodData);
+        return axios.post("/api/location/food", foodData);
     },
     locateFood:function(foodData) {
         return axios.post("/api/location/food", foodData)

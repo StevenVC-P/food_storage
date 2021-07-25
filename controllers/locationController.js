@@ -48,7 +48,7 @@ module.exports = {
         console.log("Controller", req.body)
         FoodModel
             .create(req.body)
-            .then(({ _id}) => LocationModel.findOneAndUpdate({_id: req.body.location}, {$push: {foods: _id} }, {new :true}))
+            .then(({ _id}) => LocationModel.findOneAndUpdate({_id: req.body.location}, {$push: {food: _id} }, {new :true}))
             .then(foodData => res.json(foodData))
             .catch(err => res.json(err))
     }, 

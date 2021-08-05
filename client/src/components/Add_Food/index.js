@@ -5,30 +5,28 @@ import "./style.css";
 import API from "../../utils/API";
 
 function AddFood (props) {
-    const [locationState, setLocationState] = useState([]);
     const [selection, addSelection] = useState();
     const [newFoodName, addNewFoodName] = useState("");
     const [newFoodAmount, addNewFoodAmount] = useState();
     const [newAmountType, addNewAmountType] = useState("");
     const [{foodName, foodAmount, amountType}, addFoodValue] = useState({});
-    const [items, setItems] = useState([]);
     const [count, setCount] = useState(0);
         
-    useEffect(() =>{
-    API.getLocationNames()
-        .then(res =>{
-            setItems(res.data)
+    // useEffect(() =>{
+    // API.getLocationNames()
+    //     .then(res =>{
+    //         setItems(res.data)
 
-        })
-    },[count])
+    //     })
+    // },[count])
 
-    useEffect((data)=> {
-        API.getLocations()
-        .then(res =>{
-            setLocationState(res.data)
-        })
-        console.log(selection)
-    },[selection])
+    // useEffect((data)=> {
+    //     API.getLocations()
+    //     .then(res =>{
+    //         setLocationState(res.data)
+    //     })
+    //     console.log(selection)
+    // },[selection])
 
     function handleSelection(data) {
         addSelection(data)
@@ -65,17 +63,18 @@ function AddFood (props) {
                             // location:{location}
                         })
                         // console.log(res)
+                        console.log(res)
                         console.log(newFoodName)
                         console.log(newFoodAmount)
                         console.log(newAmountType)
                         console.log({foodName, foodAmount, amountType})
 
-                        API.addFood({foodName, foodAmount, amountType, location: selection})
+                        API.addFood({foodName, foodAmount, amountType, location: res})
                         .then(res =>{
                             console.log('New Food Res', res)
                             if (res.status === 200){
-                                console.log('Success', res.data)
-                                API.locateFood(res.data)
+                                console.log('Success', res)
+                                // API.locateFood(res.data, {location: selection})
                             } else { 
                                 console.log(res.status)
                             }

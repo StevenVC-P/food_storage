@@ -13,11 +13,11 @@ function Home (props) {
     const refresh = (data) => {
         API.addLocation({locationName: data.newLocation})
         .then(res => {
-            // console.log('Location Res', res)
+            console.log('Location Res', res)
             if(res.status === 200){
-                // console.log("SUCCESS! Location Added")
+                console.log("SUCCESS! Location Added")
             } else {
-                // console.log("FAIL", res.status)
+                console.log("FAIL", res.status)
             }
         })
         .catch(err => console.log("ERROR ADDING LOCATION", err))
@@ -25,10 +25,9 @@ function Home (props) {
     };
 
     const remove = (data) => {
-        // console.log(data)
         API.removeLocation(data)
         .then(res => {
-            // console.log("location data:", res)
+            console.log("location data:", res)
         })
         .catch(err => console.log(err));
         setCount(count +1)
@@ -37,7 +36,6 @@ function Home (props) {
     useEffect(()=> {
         API.getLocations()
         .then(res =>{
-            // console.log(res)
             setLocationState(res.data)
         })
     },[count])
@@ -51,14 +49,12 @@ function Home (props) {
                 <div className = "search">
                     <h2>Locations:</h2>
                     {locationState.map(location => (
-                        // <Link to={`/location/${location._id}`}>
                             <Location 
                             deleteThis={remove}
                             key={location._id}
                             id={location._id}
                             locationName={location.locationName}
                             />
-                        //</Link>
                     ))}
                 </div>
             </div>

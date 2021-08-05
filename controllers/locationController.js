@@ -45,7 +45,7 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     addFood: function(req, res) {
-        console.log("Controller", req.body)
+        console.log("Controller1", req.body)
         FoodModel
             .create(req.body)
             .then(({ _id}) => LocationModel.findOneAndUpdate({_id: req.body.location}, {$push: {food: _id} }, {new :true}))

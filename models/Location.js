@@ -8,12 +8,12 @@ const locationSchema = new Schema({
     },
     foods: [
         {
-            type:Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: "foodModel"
         }
     ]
 })
 
-const LocationModel = mongoose.model("Location", locationSchema);
+const locationModel = mongoose.model("Location", locationSchema);
 
-module.exports = LocationModel;
+module.exports = locationModel;

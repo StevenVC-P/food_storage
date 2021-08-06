@@ -4,6 +4,7 @@ module.exports = {
     findAll: function(req, res) {
         LocationModel
         .find(req.query)
+        .populate("foods")
         .then(locationData => res.json(locationData))
         .catch(err => res.status(422).json(err));
     },

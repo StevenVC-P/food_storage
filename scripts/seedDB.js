@@ -28,12 +28,12 @@ const foodSeed = [
     {
         foodName: "Apple",
         foodAmount: 5,
-        amountTypr: "each"
+        amountType: "each"
     },
     {
         foodName: "Banana",
         foodAmount: 8,
-        amountTypr: "each"
+        amountType: "each"
     }
 ];
 

@@ -37,9 +37,9 @@ function Home (props) {
         API.getLocations()
         .then(res =>{
             setLocationState(res.data)
+            console.log(res.data)
         })
     },[count])
-
     return (
         <div>
             <AddLocation submitLocation={refresh} />
@@ -49,12 +49,14 @@ function Home (props) {
                 <div className = "search">
                     <h2>Locations:</h2>
                     {locationState.map(location => (
-                            <Location 
-                            deleteThis={remove}
-                            key={location._id}
-                            id={location._id}
-                            locationName={location.locationName}
-                            />
+                        <Location 
+                        deleteThis={remove}
+                        id={location._id}
+                        // key={location._id}
+                        locationName={location.locationName}
+                        foods={location.foods}
+                        // foodsKey={location.foods._id}
+                        />
                     ))}
                 </div>
             </div>

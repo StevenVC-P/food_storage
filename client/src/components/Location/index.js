@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 //import API from "../../utils/API";
-//import Food from "../Food";
+import Food from "../Food";
 import "./style.css";
 
 function Location (props) {
@@ -17,15 +17,20 @@ function Location (props) {
         setCount(+1)
     }
 
+    console.log(props.foods[0])
+    console.log(props)
     return (
         <div>
             <h2 className="card-title">{props.locationName}</h2>
             <button type="button" className="remove" onClick={onRemove}>X</button>
-            {/* {data.food.map(food => (
-                <div>
-                    <p className="script" key={food.id}>"{food.name} {food.amount} {food.amountType}"</p>
-                </div>
-            ))} */}
+            {props.foods.map((foods) => (
+                <Food key={foods._id}
+                    id={foods._id}
+                    foodName = {foods.foodName}
+                    foodAmount = {foods.foodAmount}
+                    amountType = {foods.amountType}
+                />
+            ))}
         </div>
     );
 }

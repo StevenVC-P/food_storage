@@ -11,22 +11,6 @@ function AddFood (props) {
     const [newAmountType, addNewAmountType] = useState("");
     const [{foodName, foodAmount, amountType}, addFoodValue] = useState({});
     const [count, setCount] = useState(0);
-        
-    // useEffect(() =>{
-    // API.getLocationNames()
-    //     .then(res =>{
-    //         setItems(res.data)
-
-    //     })
-    // },[count])
-
-    // useEffect((data)=> {
-    //     API.getLocations()
-    //     .then(res =>{
-    //         setLocationState(res.data)
-    //     })
-    //     console.log(selection)
-    // },[selection])
 
     function handleSelection(data) {
         addSelection(data)
@@ -36,6 +20,7 @@ function AddFood (props) {
         const { name, value } = e.target;
         addNewFoodName({...newFoodName, [name]: value})
         console.log(newFoodName.newFoodName)
+        console.log(newFoodName)
     };
 
     function handleAmountChange(e) {
@@ -48,45 +33,33 @@ function AddFood (props) {
         addNewAmountType({...newAmountType, [name]: value})
     };
 
-   const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(selection)
-        if(selection){
-            if(newFoodName.newFoodName && newFoodAmount.newFoodAmount && newAmountType.newAmountType){
-                API.getLocationName(selection)
-                .then(res => {
-                    if(res.status === 200){
-                        addFoodValue({
-                            foodName:newFoodName.newFoodName,
-                            foodAmount:newFoodAmount.newFoodAmount,
-                            amountType:newAmountType.newAmountType,
-                            // location:{location}
-                        })
-                        // console.log(res)
-                        console.log(res)
-                        console.log(newFoodName)
-                        console.log(newFoodAmount)
-                        console.log(newAmountType)
-                        console.log({foodName, foodAmount, amountType})
+    function createFoodObject() {
+        addFoodValue({
+            foodName:newFoodName.newFoodName,
+            foodAmount:newFoodAmount.newFoodAmount,
+            amountType:newAmountType.newAmountType,
+        })
+        //props.setCount(props.count+1)
+    }
 
-                        API.addFood({foodName, foodAmount, amountType, location: res})
-                        .then(res =>{
-                            console.log('New Food Res', res)
-                            if (res.status === 200){
-                                console.log('Success', res)
-                                // API.locateFood(res.data, {location: selection})
-                            } else { 
-                                console.log(res.status)
-                            }
-                        })
-                        .catch(err => console.log("Food Add Error", err));
-                    }
-                })
+    function addFoodtoLocation() {
+        API.addFood({foodName, foodAmount, amountType, location: selection})
+        .then(res =>{
+            console.log('New Food Res', res)
+            if (res.status === 200){
+                console.log('Success', res)
+            } else { 
+                console.log(res.status)
             }
-        } else {
-           console.log("Please Select a Location")
-        }
-    };
+        })
+        .catch(err => console.log("Food Add Error", err));
+    }
+
+   const handleSubmit = async (e) => {
+       e.preventDefault();
+       await createFoodObject();
+       await addFoodtoLocation();
+   }
 
     return(
         <Container style={{ marginTop:20}}>

@@ -43,7 +43,9 @@ function Home (props) {
     return (
         <div>
             <AddLocation submitLocation={refresh} />
-            <AddFood />
+            <AddFood 
+                setCount={setCount}
+                count={count}/>
             <Container>
             <div className = "col-sm">
                 <div className = "search">

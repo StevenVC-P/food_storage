@@ -37,7 +37,6 @@ function Home (props) {
         API.getLocations()
         .then(res =>{
             setLocationState(res.data)
-            console.log(res.data)
         })
     },[count])
     return (

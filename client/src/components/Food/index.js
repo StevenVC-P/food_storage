@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-// import "./style.css"
+import "./style.css"
 
 function Food (props) {
 
@@ -8,12 +8,11 @@ function Food (props) {
         // console.log(props.id);
         props.deleteThis(props.id);
     }
-    console.log(props)
     return (
-        <div>
-            <h2 className="card-title">{props.foodName}</h2>
-            <h2 className="card-title">{props.foodAmount}</h2>
-            <h2 className="card-title">{props.amountType}</h2>
+        <div className="food">
+            <h6 className="card-title-food">{props.foodName}</h6>
+            <h6 className="card-title-food">{props.foodAmount}</h6>
+            <h6 className="card-title-food">{props.amountType}</h6>
             <button type="button" className="remove" onClick={onRemove}>X</button>
         </div>
     );

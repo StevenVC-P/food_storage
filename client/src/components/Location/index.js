@@ -17,8 +17,6 @@ function Location (props) {
         setCount(+1)
     }
 
-    console.log(props.foods[0])
-    console.log(props)
     return (
         <div>
             <h2 className="card-title">{props.locationName}</h2>

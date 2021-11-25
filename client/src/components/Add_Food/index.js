@@ -19,8 +19,6 @@ function AddFood (props) {
     function handleInputChange(e) {
         const { name, value } = e.target;
         addNewFoodName({...newFoodName, [name]: value})
-        console.log(newFoodName.newFoodName)
-        console.log(newFoodName)
     };
 
     function handleAmountChange(e) {
@@ -33,32 +31,43 @@ function AddFood (props) {
         addNewAmountType({...newAmountType, [name]: value})
     };
 
+
     function createFoodObject() {
         addFoodValue({
             foodName:newFoodName.newFoodName,
             foodAmount:newFoodAmount.newFoodAmount,
             amountType:newAmountType.newAmountType,
         })
-        //props.setCount(props.count+1)
-    }
-
-    function addFoodtoLocation() {
+        
         API.addFood({foodName, foodAmount, amountType, location: selection})
-        .then(res =>{
-            console.log('New Food Res', res)
-            if (res.status === 200){
-                console.log('Success', res)
-            } else { 
-                console.log(res.status)
-            }
-        })
-        .catch(err => console.log("Food Add Error", err));
+            .then(res =>{
+                if (res.status === 200){
+                    console.log('Success', res)
+                } else { 
+                    console.log(res.status)
+                }
+            })
+            .catch(err => console.log("Food Add Error", err));
+        props.setCount(props.count+1)
     }
 
-   const handleSubmit = async (e) => {
-       e.preventDefault();
-       await createFoodObject();
-       await addFoodtoLocation();
+    // function addFoodtoLocation() {
+    //     API.addFood({foodName, foodAmount, amountType, location: selection})
+    //     .then(res =>{
+    //         if (res.status === 200){
+    //             console.log('Success', res)
+    //         } else { 
+    //             console.log(res.status)
+    //         }
+    //     })
+    //     .catch(err => console.log("Food Add Error", err));
+    //     props.setCount(props.count+1)
+    // }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        createFoodObject();
+        // addFoodtoLocation();
    }
 
     return(
